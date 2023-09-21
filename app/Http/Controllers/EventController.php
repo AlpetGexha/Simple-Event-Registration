@@ -14,7 +14,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::query()
-            ->with('user')
+            ->with('user','tags')
             ->published()
             ->isNotFinished()
             ->get();

@@ -5,8 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <livewire:event.carts :events="$events" lazy />
-    </div>
+    <livewire:event.carts :events="$events" />
+
 
 </x-app-layout>

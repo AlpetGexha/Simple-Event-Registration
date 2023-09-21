@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Tags\HasTags;
 
 class Event extends Model
 {
     use HasFactory,
         Sluggable,
+        HasTags,
         SoftDeletes;
 
     protected $fillable = [
@@ -66,14 +68,13 @@ class Event extends Model
         }]);
     }
 
-    public function scopeCheckIfIsAttendeed(Builder $query)
+    public function scopeCheckIfIsAttendeed(Builder $query): void
     {
         $query->addSelect([
             'is_attended' => Attendee::query()
                 ->select('id')
                 ->where('user_id', auth()->id())
                 ->whereColumn('event_id', 'events.id'),
-
         ]);
     }
 

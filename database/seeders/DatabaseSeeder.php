@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->command->warn(PHP_EOL . 'Creating event...');
         $event = $this->withProgressBar(10, fn() => Event::factory(1)
             ->sequence(fn() => ['user_id' => $user->random()->id])
+            ->withTags()
             ->create()
         );
         $this->command->info('Event created.');

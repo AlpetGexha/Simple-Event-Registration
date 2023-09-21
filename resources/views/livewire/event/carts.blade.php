@@ -1,11 +1,20 @@
 <?php
-use function Livewire\Volt\{placeholder};
-placeholder(view('components.skeleton-load'));
+use Livewire\Volt\Component;
+use App\Models\User;
 
-use function Livewire\Volt\{state};
-state('events');
+new class extends Component {
+    public $events;
 
-?>
+    public function mount($events)
+    {
+        $this->events = $events;
+    }
+
+    public function placeholder()
+    {
+        return view('components.skeleton-load');
+    }
+}; ?>
 
 <div>
 

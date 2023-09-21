@@ -29,4 +29,11 @@ class EventFactory extends Factory
             'end_date' => $this->faker->dateTimeBetween('now', '+1 week'),
         ];
     }
+
+    public function withTags(): Factory
+    {
+        return $this->afterCreating(function (Event $event) {
+            $event->attachTags($this->faker->randomElements(['php', 'laravel', 'symfony', 'alpinejs', 'livewire', 'volt', 'folt', 'chill'], rand(1, 4)));
+        });
+    }
 }

@@ -64,7 +64,7 @@ class Event extends Model
     {
         // list all the perople from this event who are attendees this event
         $query->with(['attendees' => function ($query) {
-            $query->with('user')->where('status', 'going');
+            $query->with('user')->where('status', 'going')->orderBy('created_at','desc');
         }]);
     }
 
@@ -74,7 +74,7 @@ class Event extends Model
             'is_attended' => Attendee::query()
                 ->select('id')
                 ->where('user_id', auth()->id())
-                ->whereColumn('event_id', 'events.id'),
+                ->whereColumn('event_id', 'events.id')
         ]);
     }
 

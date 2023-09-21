@@ -10,7 +10,8 @@ state(['event']);
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-5">
     <div class="p-6 text-gray-900">
         <b>
-            <h3><a wire:navigate href="{{ route('event.single', ['event' => $event->slug]) }}">{{ $event->title }}</a>
+            <h3>
+                <a wire:navigate href="{{ route('event.single', ['event' => $event->slug]) }}">{{ $event->title }}</a>
             </h3>
         </b>
         {{-- @dd($event) --}}

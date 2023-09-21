@@ -43,6 +43,7 @@ $toggle = function () {
     }
 
     $this->isAttendee = !$this->isAttendee;
+    $this->dispatch('event-toggle');
 };
 
 ?>

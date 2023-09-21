@@ -28,11 +28,8 @@
         <livewire:event.action :event="$event" />
 
         People Who are going <br>
-        @forelse ($event->attendees as $event)
-            <i>{{ $event->user->name }}</i> <br>
-        @empty
-            NUK KA njerz per kete event
-        @endforelse
+
+        <livewire:event.event-attendees :peoples="$event->attendees" />
 
     </div>
 </x-app-layout>

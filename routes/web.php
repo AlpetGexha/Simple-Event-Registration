@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +16,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $events = App\Models\Event::query()
+        ->with('user')
+        ->published()
+        ->get();
+
+    return view('event.index', compact('events'));
 });
 
-Route::get('/dashboard', function () {
+Route::get('event/{event:slug}', function () {
+
+    $event = App\Models\Event::query()
+        ->with('user')
+        ->published()
+        ->withPeopopleWhoIsGoing()
+        ->checkIfIsAttendeed()
+        ->first();
+    // abort_if(!$event->isPublished(), 404);
+
+    return view('event.single', compact('event'));
+})->scopeBindings()->name('event.single');
+
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -21,4 +21,14 @@ class Attendee extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($attendee) {
+            if (auth()->check())
+                $attendee->user_id = auth()->id();
+        });
+    }
 }

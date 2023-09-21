@@ -29,7 +29,7 @@ class AttendeePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return auth()->check();
     }
 
     /**

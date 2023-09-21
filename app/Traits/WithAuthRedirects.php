@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-class WithAuthRedirects
+trait WithAuthRedirects
 {
     public function redirectToLogin()
     {

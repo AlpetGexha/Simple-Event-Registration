@@ -1,8 +1,10 @@
 <?php
 
-use function Livewire\Volt\{state};
-use function Livewire\Volt\{computed};
+use function Livewire\Volt\{state, uses, computed};
 use Livewire\Attributes\On;
+use App\Traits\WithAuthRedirects;
+
+uses([WithAuthRedirects::class]);
 
 state(['event']);
 state(['isAttendee' => fn($event) => $event->is_attended]);
@@ -30,6 +32,10 @@ $userHasAttendee = function () {
 };
 
 $toggle = function () {
+    if (!auth()->check()) {
+        return $this->redirectToLogin();
+    }
+
     if ($this->userHasAttendee()) {
         $this->unAttendee();
     } else {

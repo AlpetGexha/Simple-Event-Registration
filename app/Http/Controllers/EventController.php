@@ -43,6 +43,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        
+
         $event =  Event::query()
             ->with('user')
             ->published()

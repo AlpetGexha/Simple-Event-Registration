@@ -13,7 +13,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::query()
+            ->with('user')
+            ->published()
+            ->get();
+
+        return view('event.index', compact('events'));
     }
 
     /**
@@ -37,7 +42,14 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $event = Event::query()
+            ->with('user')
+            ->published()
+            ->withPeopopleWhoIsGoing()
+            ->checkIfIsAttendeed()
+            ->first();
+
+        return view('event.single', compact('event'));
     }
 
     /**

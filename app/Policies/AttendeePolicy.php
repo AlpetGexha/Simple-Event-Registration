@@ -13,7 +13,7 @@ class AttendeePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        
     }
 
     /**

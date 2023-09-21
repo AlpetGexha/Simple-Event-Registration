@@ -1,8 +1,10 @@
 <?php
+use function Livewire\Volt\{placeholder};
+placeholder(view('components.skeleton-load'));
 
 use function Livewire\Volt\{state};
+state('events');
 
-state('events')
 ?>
 
 <div>

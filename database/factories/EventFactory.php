@@ -17,8 +17,10 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->title;
         return [
-            'title' => $this->faker->title,
+            'title' => $title,
+            'slug' => str()->slug($title),
             'body' => $this->faker->text,
             'place' => $this->faker->address,
             'status' => $this->faker->randomElement(['active', 'closed', 'canceled']),

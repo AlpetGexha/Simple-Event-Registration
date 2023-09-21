@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->string('title');
+            $table->string('slug');
             $table->text('body');
             $table->string('place');
             $table->timestamp('start_date');

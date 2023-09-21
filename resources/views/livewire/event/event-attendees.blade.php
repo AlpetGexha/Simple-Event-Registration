@@ -10,14 +10,14 @@ new class extends Component {
         $this->peoples = $peoples;
     }
 
-    public function updatedPeoples()
-    {
-        if ($this->peoples->first()->user?->name == auth()->user()->name) {
-            $this->peoples->shift();
-        } else {
-            $this->peoples->prepend(auth()->user());
-        }
-    }
+    // public function updatedPeoples()
+    // {
+    //     if ($this->peoples->first()->user?->name == auth()->user()->name) {
+    //         $this->peoples->shift();
+    //     } else {
+    //         $this->peoples->prepend(auth()->user());
+    //     }
+    // }
 };
 ?>
 <div>

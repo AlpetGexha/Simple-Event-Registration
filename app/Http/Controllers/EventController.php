@@ -14,11 +14,13 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::query()
-            ->with('user','tags')
+            ->with('user', 'tags')
             ->published()
             ->isNotFinished()
+            ->withCount([
+                'attendees' => fn ($query) => $query->where('status', 'going'),
+            ])
             ->get();
-
         return view('event.index', compact('events'));
     }
 

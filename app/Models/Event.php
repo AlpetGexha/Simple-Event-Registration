@@ -64,7 +64,10 @@ class Event extends Model
     {
         // list all the perople from this event who are attendees this event
         $query->with(['attendees' => function ($query) {
-            $query->with('user')->where('status', 'going')->orderBy('created_at','desc');
+            $query->with('user')
+                ->where('status', 'going')
+                // TODO: get the user only on this event
+                ->orderBy('created_at', 'desc');
         }]);
     }
 

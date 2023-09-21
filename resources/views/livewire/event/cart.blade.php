@@ -35,6 +35,8 @@ state(['event']);
         {{ \Carbon\Carbon::parse($event->end_date)->isoFormat('MMM Do YYYY h:mm') }}
         <br>
         Starting in: {{ $event->start_date->diffForHumans() }}
+        <br>
+        People going: {{ $event->attendees_count }}
 
     </div>
 </div>

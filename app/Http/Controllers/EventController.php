@@ -16,6 +16,7 @@ class EventController extends Controller
         $events = Event::query()
             ->with('user')
             ->published()
+            ->isNotFinished()
             ->get();
 
         return view('event.index', compact('events'));
@@ -42,7 +43,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $event = Event::query()
+        $event =  Event::query()
             ->with('user')
             ->published()
             ->withPeopopleWhoIsGoing()

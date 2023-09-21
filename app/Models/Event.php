@@ -48,6 +48,11 @@ class Event extends Model
         $query->where('status', 'active');
     }
 
+    public function scopeIsNotFinished(Builder $query): void
+    {
+        $query->where('end_date', '>=', now());
+    }
+
     public function isPublished(): bool
     {
         return $this->status === 'active';

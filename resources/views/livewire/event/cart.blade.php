@@ -36,6 +36,8 @@ state(['event']);
         <br>
         Starting in: {{ $event->start_date->diffForHumans() }}
         <br>
+        (test) Status: <b>{{ App\Service\EventService::eventStatusDate($event->start_date, $event->end_date) }}</b>
+        <br>
         People going: {{ $event->attendees_count }}
 
     </div>

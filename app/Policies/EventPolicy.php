@@ -29,7 +29,7 @@ class EventPolicy
      */
     public function create(User $user): bool
     {
-        return $user->check();
+        return $user ? true : false;
     }
 
     /**

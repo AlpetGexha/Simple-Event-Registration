@@ -33,7 +33,7 @@
         <!-- Page Content -->
         <main>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
-                <div class="py-12">
+                <div class="py-2">
                     {{ $slot }}
                 </div>
             </div>

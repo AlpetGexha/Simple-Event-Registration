@@ -84,4 +84,16 @@ class Event extends Model
             ],
         ];
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($event) {
+            if (auth()->check()) {
+                $event->user_id = auth()->id();
+                $event->status = 'active';
+            }
+        });
+    }
 }

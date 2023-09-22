@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Event;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
@@ -24,4 +25,15 @@ class EventForm extends Form
 
     #[Rule('nullable')]
     public $price;
+
+
+    public function setEvent(Event $event)
+    {
+        $this->title = $event->title;
+        $this->body = $event->body;
+        $this->place = $event->place;
+        $this->start_date = $event->start_date;
+        $this->end_date = $event->end_date;
+        $this->price = $event->price;
+    }
 }

@@ -68,9 +68,14 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(Event $event)
     {
-        //
+
+        if (!$event->status == 'active' || !$event->user_id === auth()->id()) {
+            dd("NO");
+        }
+
+        return view('event.update', compact('event'));
     }
 
     /**

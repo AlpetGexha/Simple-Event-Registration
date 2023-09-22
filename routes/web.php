@@ -18,6 +18,7 @@ Route::group([
     Route::get('/{event:slug}', 'show')->scopeBindings()->name('single');
     Route::get('/events/i-am-going-to', 'goingto')->name('goingto')->middleware('auth');
     Route::get('/event/create', 'create')->name('create')->middleware('auth');
+    Route::get('/event/update/{event:id}', 'update')->scopeBindings()->name('update')->middleware('auth');
 });
 
 Route::get('dashboard', function () {

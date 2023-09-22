@@ -12,7 +12,6 @@ state(['isAttendee' => fn($event) => $event->is_attended]);
 $attendee = function () {
     $this->event->attendees()->create([
         'user_id' => auth()->id(),
-        'event_id' => $this->event->id,
         'status' => 'going',
     ]);
 };

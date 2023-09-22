@@ -43,14 +43,15 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(String $slug)
     {
 
         $event =  Event::query()
+            ->where('slug', $slug)
             ->with('user')
             ->published()
-            // ->withPeopopleWhoIsGoing()
             ->checkIfIsAttendeed()
+            // ->withPeopopleWhoIsGoing()
             ->first();
 
         return view('event.single', compact('event'));

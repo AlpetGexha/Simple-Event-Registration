@@ -16,7 +16,9 @@ Route::group([
 ], function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{event:slug}', 'show')->scopeBindings()->name('single');
+    Route::get('/events/i-am-going-to', 'goingto')->name('goingto')->middleware('auth');
 });
+
 
 Route::get('dashboard', function () {
     return view('dashboard');

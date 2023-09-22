@@ -46,7 +46,7 @@ class EventController extends Controller
     public function show(String $slug)
     {
 
-        $event =  Event::query()
+        $event = Event::query()
             ->where('slug', $slug)
             ->with('user')
             ->published()
@@ -79,5 +79,14 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function goingto()
+    {
+        $events = Event::query()
+            ->eventIAmGoingTo()
+            ->get();
+
+        return view('event.goingto', compact('events'));
     }
 }

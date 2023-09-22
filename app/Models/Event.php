@@ -70,6 +70,12 @@ class Event extends Model
         ]);
     }
 
+    public function scopeEventIAmGoingTo(Builder $query): void
+    {
+        $query->withWhereHas('attendees', function ($query) {
+            $query->where('user_id', auth()->id());
+        });
+    }
     public function sluggable(): array
     {
         return [

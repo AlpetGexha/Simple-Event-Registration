@@ -6,7 +6,7 @@
     </x-slot>
 
     {{-- @can('viewAny', \App\Models\Event::class) --}}
-        <livewire:event.carts :events="$events" />
+    <livewire:event.carts :events="$events" lazy />
     {{-- @endcan --}}
 
 </x-app-layout>

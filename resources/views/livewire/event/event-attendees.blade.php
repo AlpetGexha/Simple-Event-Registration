@@ -1,28 +1,28 @@
 <?php
-use Livewire\Volt\Component;
-use Livewire\Attributes\On;
+use function Livewire\Volt\{state, on};
 
-new class extends Component {
-    public $peoples;
+state(['event_id'])->locked();
 
-    public function mount($peoples)
-    {
-        $this->peoples = $peoples;
-    }
+on(['event-toggle' => fn() => state(['event_id' => null])]);
 
-    // public function updatedPeoples()
-    // {
-    //     if ($this->peoples->first()->user?->name == auth()->user()->name) {
-    //         $this->peoples->shift();
-    //     } else {
-    //         $this->peoples->prepend(auth()->user());
-    //     }
-    // }
+
+$peoples = function () {
+    // return $this->event_id;
+    return App\Models\Attendee::query()
+        ->withWhereHas('user', function ($query) {
+            $query->select('id', 'name');
+        })
+        ->where('event_id', $this->event_id)
+        ->where('status', 'going')
+        ->latest()
+        ->get();
+    // ->map(function ($attendee) {
+    //     return $attendee->user->name;
+    // });
 };
 ?>
 <div>
-    {{-- @dd($peoples) --}}
-    @forelse ($peoples as $people)
+    @forelse ($this->peoples() as $people)
         <span>
             {{ $people->user->name }} <br>
         </span>

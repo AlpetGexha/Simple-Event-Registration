@@ -60,17 +60,6 @@ class Event extends Model
         return $this->status === 'active';
     }
 
-    public function scopeWithPeopopleWhoIsGoing(Builder $query): void
-    {
-        // list all the perople from this event who are attendees this event
-        $query->with(['attendees' => function ($query) {
-            $query->with('user')
-                ->where('status', 'going')
-                // TODO: get the user only on this event
-                ->orderBy('created_at', 'desc');
-        }]);
-    }
-
     public function scopeCheckIfIsAttendeed(Builder $query): void
     {
         $query->addSelect([

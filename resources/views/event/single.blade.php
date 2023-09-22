@@ -29,7 +29,7 @@
 
         People Who are going <br>
 
-        <livewire:event.event-attendees :peoples="$event->attendees" />
+        <livewire:event.event-attendees :event_id="$event->id" />
 
     </div>
 </x-app-layout>

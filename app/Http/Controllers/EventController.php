@@ -49,7 +49,7 @@ class EventController extends Controller
         $event =  Event::query()
             ->with('user')
             ->published()
-            ->withPeopopleWhoIsGoing()
+            // ->withPeopopleWhoIsGoing()
             ->checkIfIsAttendeed()
             ->first();
 

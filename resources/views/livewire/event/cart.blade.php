@@ -21,7 +21,6 @@ state(['event']);
                 class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                 {{ $tag->name }}
             </span>
-
         @empty
         @endforelse
         <br>
@@ -40,5 +39,9 @@ state(['event']);
         <br>
         People going: {{ $event->attendees_count }}
 
+        @if ($event->user_id === auth()->id())
+            <br><br><br>
+            <a wire:navigate href="{{ route('event.update', ['event' => $event->id]) }}">Update</a>
+        @endif
     </div>
 </div>

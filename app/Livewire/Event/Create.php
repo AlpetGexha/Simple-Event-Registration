@@ -23,6 +23,7 @@ class Create extends Component
         $event = Event::create(
             $this->form->all()
         );
+
         return $this->redirect(route('event.update', ['event' => $event->id]));
         // create an Attendee form this event
         // $event->attendees()->create([
@@ -30,7 +31,6 @@ class Create extends Component
         // ]);
         // });
         // dd($event);
-
 
         // $this->reset($this->form->all());
     }

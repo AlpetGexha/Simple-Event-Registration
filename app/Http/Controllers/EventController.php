@@ -70,10 +70,7 @@ class EventController extends Controller
      */
     public function update(Event $event)
     {
-
-        if (!$event->status == 'active' || !$event->user_id === auth()->id()) {
-            dd("NO");
-        }
+        abort_if(!($event->status == 'active') || !($event->user_id === auth()->id()), 403);
 
         return view('event.update', compact('event'));
     }

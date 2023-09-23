@@ -24,6 +24,10 @@ class Create extends Component
             $this->form->all()
         );
 
+        // $tags = explode(",", $this->form->tags);
+
+        // $event->tags()->create($tags);
+
         return $this->redirect(route('event.update', ['event' => $event->id]));
         // create an Attendee form this event
         // $event->attendees()->create([

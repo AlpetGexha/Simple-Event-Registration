@@ -51,7 +51,15 @@
         <x-input-error :messages="$errors->get('form.price')" class="mt-2" />
     </div>
 
-
+    <div class="mt-5">
+        <x-input-label for="tags" :value="__('tags')" />
+        <x-text-input wire:model='form.tags' class="block mt-1 w-full" type="text" required autofocus
+            autocomplete="tags" />
+        <x-input-error :messages="$errors->get('form.tags')" class="mt-2" />
+        <span class="text-sm text-gray-600 space-y-1">
+            ex1,ex2,ex3
+        </span>
+    </div>
 
     <div class="flex items-center justify-end mt-4">
 

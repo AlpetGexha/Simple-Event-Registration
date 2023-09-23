@@ -26,6 +26,9 @@ class EventForm extends Form
     #[Rule('nullable')]
     public $price;
 
+    #[Rule('nullable')]
+    public $tags;
+
 
     public function setEvent(Event $event)
     {

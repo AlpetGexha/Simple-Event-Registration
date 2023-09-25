@@ -12,6 +12,17 @@ class Attendee extends Model
 
     protected $fillable = ['user_id', 'event_id', 'status'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($attendee) {
+            if (auth()->check()) {
+                $attendee->user_id = auth()->id();
+            }
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -20,15 +31,5 @@ class Attendee extends Model
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($attendee) {
-            if (auth()->check())
-                $attendee->user_id = auth()->id();
-        });
     }
 }

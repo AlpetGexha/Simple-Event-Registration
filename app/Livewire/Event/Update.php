@@ -22,7 +22,7 @@ class Update extends Component
             $this->form->all()
         );
 
-     return $this->redirect(route('event.single', $this->event->slug));
+        return $this->redirect(route('event.single', $this->event->slug));
     }
 
     public function render()

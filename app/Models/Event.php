@@ -14,8 +14,8 @@ use Spatie\Tags\HasTags;
 class Event extends Model
 {
     use HasFactory,
-        Sluggable,
         HasTags,
+        Sluggable,
         SoftDeletes;
 
     protected $fillable = [
@@ -34,6 +34,18 @@ class Event extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($event) {
+            if (auth()->check()) {
+                $event->user_id = auth()->id();
+                $event->status = 'active';
+            }
+        });
+    }
 
     public function user(): BelongsTo
     {
@@ -66,7 +78,7 @@ class Event extends Model
             'is_attended' => Attendee::query()
                 ->select('id')
                 ->where('user_id', auth()->id())
-                ->whereColumn('event_id', 'events.id')
+                ->whereColumn('event_id', 'events.id'),
         ]);
     }
 
@@ -76,6 +88,7 @@ class Event extends Model
             $query->where('user_id', auth()->id());
         });
     }
+
     public function sluggable(): array
     {
         return [
@@ -83,17 +96,5 @@ class Event extends Model
                 'source' => 'title',
             ],
         ];
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($event) {
-            if (auth()->check()) {
-                $event->user_id = auth()->id();
-                $event->status = 'active';
-            }
-        });
     }
 }

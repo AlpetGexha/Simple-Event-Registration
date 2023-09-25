@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\UpdateEventRequest;
+use App\Models\Event;
 
 class EventController extends Controller
 {
@@ -21,6 +20,7 @@ class EventController extends Controller
                 'attendees' => fn ($query) => $query->where('status', 'going'),
             ])
             ->get();
+
         return view('event.index', compact('events'));
     }
 
@@ -43,9 +43,8 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(String $slug)
+    public function show(string $slug)
     {
-
 
         $event = Event::query()
             ->where('slug', $slug)
@@ -56,6 +55,7 @@ class EventController extends Controller
             ->checkIfIsAttendeed()
             // ->withPeopopleWhoIsGoing()
             ->first();
+
         return view('event.single', compact('event'));
     }
 
@@ -72,7 +72,7 @@ class EventController extends Controller
      */
     public function update(Event $event)
     {
-        abort_if(!($event->status == 'active') || !($event->user_id === auth()->id()), 403);
+        abort_if(! ($event->status == 'active') || ! ($event->user_id === auth()->id()), 403);
 
         return view('event.update', compact('event'));
     }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendee;
 use App\Http\Requests\StoreAttendeeRequest;
 use App\Http\Requests\UpdateAttendeeRequest;
+use App\Models\Attendee;
 
 class AttendeeController extends Controller
 {

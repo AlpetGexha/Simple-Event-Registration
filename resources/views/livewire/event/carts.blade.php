@@ -19,7 +19,7 @@ on(['eventDeleted' => fn() => session()->flash('status', 'Event Deleted')]);
         </div>
     @endif
 
-    @forelse($events as $event)
+    @forelse ($events as $event)
         <livewire:event.cart :event="$event" :key="$event->id" />
     @empty
         NUK KA EVENTE

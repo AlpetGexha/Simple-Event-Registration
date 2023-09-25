@@ -30,7 +30,6 @@ class EventForm extends Form
     #[Rule('nullable')]
     public $tags;
 
-
     public function setEvent(Event $event)
     {
         $this->title = $event->title;

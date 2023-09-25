@@ -15,7 +15,7 @@ class Create extends Component
 
     public function create()
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return $this->redirectToLogin();
         }
         // dd($this->form);
@@ -26,9 +26,8 @@ class Create extends Component
             $this->form->all()
         );
 
-        $tags = explode(",", $this->form->tags);
+        $tags = explode(',', $this->form->tags);
         $event->attachTags($tags);
-
 
         // $event->tags()->create($tags);
 

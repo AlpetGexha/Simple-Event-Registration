@@ -12,9 +12,8 @@ class Action extends Component
 
     protected $listeners = [
         'unAtendee' => '$refresh',
-        'attendee' => '$refresh'
+        'attendee' => '$refresh',
     ];
-
 
     public function mount($event)
     {

@@ -16,10 +16,10 @@ Route::group([
 ], function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{event:slug}', 'show')->scopeBindings()->name('single');
-    Route::get('/events/i-am-going-to', 'goingto')->name('goingto')->middleware('auth');
-    Route::get('/events/my-events', 'myevents')->name('myevents')->middleware('auth');
-    Route::get('/event/create', 'create')->name('create')->middleware('auth');
-    Route::get('/event/update/{event:id}', 'update')->scopeBindings()->name('update')->middleware('auth');
+    Route::get('/i/i-am-going-to', 'goingto')->name('goingto')->middleware('auth');
+    Route::get('/i/my-events', 'myevents')->name('myevents')->middleware('auth');
+    Route::get('/i/create', 'create')->name('create')->middleware('auth');
+    Route::get('/i/update/{event:id}', 'update')->scopeBindings()->name('update')->middleware('auth');
 });
 
 Route::get('dashboard', function () {

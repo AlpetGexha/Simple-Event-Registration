@@ -20,7 +20,7 @@ class Create extends Component
         }
         // dd($this->form);
         // DB::transaction(function (EventForm $form) {
-
+        $this->form->validate();
 
         $event = Event::create(
             $this->form->all()

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EventResource\Pages;
 use App\Filament\Resources\EventResource\RelationManagers;
+use App\Filament\Resources\EventResource\RelationManagers\AttendeesRelationManager;
 use App\Models\Event;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -86,7 +87,7 @@ class EventResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AttendeesRelationManager::class,
         ];
     }
 

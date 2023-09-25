@@ -17,7 +17,8 @@ class EventForm extends Form
     #[Rule('required|min:2|max:255')]
     public $place;
 
-    #[Rule('required|before:end_date')]
+    // #[Rule('required|before:end_date')]
+    #[Rule('required')]
     public $start_date;
 
     #[Rule('required')]

@@ -46,14 +46,16 @@ class EventController extends Controller
     public function show(String $slug)
     {
 
+
         $event = Event::query()
             ->where('slug', $slug)
             ->with('user')
-            ->published()
+            ->when('user_id' == auth()->id(), function ($query) {
+                $query->published();
+            })
             ->checkIfIsAttendeed()
             // ->withPeopopleWhoIsGoing()
             ->first();
-
         return view('event.single', compact('event'));
     }
 

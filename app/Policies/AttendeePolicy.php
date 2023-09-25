@@ -13,7 +13,7 @@ class AttendeePolicy
      */
     public function viewAny(User $user): bool
     {
-        
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class AttendeePolicy
      */
     public function view(User $user, Attendee $attendee): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class AttendeePolicy
      */
     public function update(User $user, Attendee $attendee): bool
     {
-        //
+        return $user->id === $attendee->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class AttendeePolicy
      */
     public function delete(User $user, Attendee $attendee): bool
     {
-        //
+        return $user->id === $attendee->id;
     }
 
     /**
@@ -53,7 +53,7 @@ class AttendeePolicy
      */
     public function restore(User $user, Attendee $attendee): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class AttendeePolicy
      */
     public function forceDelete(User $user, Attendee $attendee): bool
     {
-        //
+        return true;
     }
 }

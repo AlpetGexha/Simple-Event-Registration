@@ -20,15 +20,19 @@ class Create extends Component
         }
         // dd($this->form);
         // DB::transaction(function (EventForm $form) {
+
+
         $event = Event::create(
             $this->form->all()
         );
 
-        // $tags = explode(",", $this->form->tags);
+        $tags = explode(",", $this->form->tags);
+        $event->attachTags($tags);
+
 
         // $event->tags()->create($tags);
 
-        return $this->redirect(route('event.update', ['event' => $event->id]));
+        return to_route('event.update', ['event' => $event->id]);
         // create an Attendee form this event
         // $event->attendees()->create([
         //     'status' => 'going',

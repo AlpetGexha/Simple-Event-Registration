@@ -1,18 +1,16 @@
 <?php
 
-use function Livewire\Volt\{state, placeholder, on};
+use function Livewire\Volt\{state, placeholder, on, usesPagination};
+
+//usesPagination();
 
 state('events');
 // placeholder('components.skeleton-load');
-
-// on(['eventDeleted' => fn() => state(['events' => null])]);
-// refresh the component
 on(['eventDeleted' => fn() => session()->flash('status', 'Event Deleted')]);
 
 ?>
 
 <div>
-
     @if (session()->has('status'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
             <span class="block sm:inline">{{ session('status') }}</span>
@@ -20,10 +18,13 @@ on(['eventDeleted' => fn() => session()->flash('status', 'Event Deleted')]);
     @endif
 
     @forelse ($events as $event)
-        <livewire:event.cart :event="$event" :key="$event->id" />
+{{--        @can('view', $event)--}}
+            <livewire:event.cart :event="$event" :key="$event->id"/>
+{{--        @endcan--}}
     @empty
-        NUK KA EVENTE
+        {{ __('No events found')}}
     @endforelse
 
+{{--    {{ $events->links() }}--}}
 
 </div>

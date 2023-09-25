@@ -2,26 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\WithUserId;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Attendee extends Model
 {
-    use HasFactory;
+    use HasFactory, WithUserId;
 
     protected $fillable = ['user_id', 'event_id', 'status'];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($attendee) {
-            if (auth()->check()) {
-                $attendee->user_id = auth()->id();
-            }
-        });
-    }
 
     public function user(): BelongsTo
     {

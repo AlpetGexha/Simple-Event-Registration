@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreEventRequest;
 use App\Models\Event;
 
 class EventController extends Controller
@@ -16,10 +15,8 @@ class EventController extends Controller
             ->with('user', 'tags')
             ->published()
             ->isNotFinished()
-            ->withCount([
-                'attendees' => fn ($query) => $query->where('status', 'going'),
-            ])
-            ->get();
+            ->countAttendees()
+            ->get(1);
 
         return view('event.index', compact('events'));
     }
@@ -33,21 +30,13 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEventRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $slug)
     {
 
         $event = Event::query()
-            ->where('slug', $slug)
+            ->whereSlug($slug)
             ->with('user')
             ->when('user_id' == auth()->id(), function ($query) {
                 $query->published();
@@ -56,15 +45,9 @@ class EventController extends Controller
             // ->withPeopopleWhoIsGoing()
             ->first();
 
-        return view('event.single', compact('event'));
-    }
+        abort_if(! $event, 404);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
+        return view('event.single', compact('event'));
     }
 
     /**
@@ -72,20 +55,12 @@ class EventController extends Controller
      */
     public function update(Event $event)
     {
-        abort_if(! ($event->status == 'active') || ! ($event->user_id === auth()->id()), 403);
+        abort_if(! ($event->status == 'active') || auth()->user()->cannot('update', $event), 403);
 
         return view('event.update', compact('event'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Event $event)
-    {
-        //
-    }
-
-    public function goingto()
+    public function goingTo()
     {
         $events = Event::query()
             ->eventIAmGoingTo()
@@ -94,10 +69,10 @@ class EventController extends Controller
         return view('event.goingto', compact('events'));
     }
 
-    public function myevents()
+    public function myEvents()
     {
         $events = Event::query()
-            ->where('user_id', auth()->id())
+            ->myEvents()
             ->get();
 
         return view('event.myevent', compact('events'));

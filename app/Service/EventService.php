@@ -34,4 +34,12 @@ class EventService
 
         return 'NULL';
     }
+
+    public static function dateRange(Carbon $from, Carbon $to): string
+    {
+        $start = Carbon::parse($from)->isoFormat('MMM Do YYYY h:mm');
+        $end = Carbon::parse($to)->isoFormat('MMM Do YYYY h:mm');
+
+        return "{$start} - {$end}";
+    }
 }

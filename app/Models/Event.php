@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\WithUserId;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,8 @@ class Event extends Model
     use HasFactory,
         HasTags,
         Sluggable,
-        SoftDeletes;
+        SoftDeletes,
+        WithUserId;
 
     protected $fillable = [
         'user_id',
@@ -35,18 +37,6 @@ class Event extends Model
         'end_date' => 'datetime',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($event) {
-            if (auth()->check()) {
-                $event->user_id = auth()->id();
-                $event->status = 'active';
-            }
-        });
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -60,6 +50,13 @@ class Event extends Model
     public function scopePublished(Builder $query): void
     {
         $query->where('status', 'active');
+    }
+
+    public function scopeCountAttendees(Builder $query): void
+    {
+        $query->withCount([
+            'attendees' => fn ($query) => $query->whereStatus('going'),
+        ]);
     }
 
     public function scopeIsNotFinished(Builder $query): void
@@ -87,6 +84,11 @@ class Event extends Model
         $query->withWhereHas('attendees', function ($query) {
             $query->where('user_id', auth()->id());
         });
+    }
+
+    public function scopeMyEvents(Builder $query): void
+    {
+        $query->where('user_id', auth()->id());
     }
 
     public function sluggable(): array

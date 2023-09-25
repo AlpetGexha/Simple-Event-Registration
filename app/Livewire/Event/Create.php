@@ -13,7 +13,7 @@ class Create extends Component
     use WithAuthRedirects;
     public EventForm $form;
 
-    public function create()
+    public function create(): \Illuminate\Http\RedirectResponse
     {
         if (! auth()->check()) {
             return $this->redirectToLogin();
@@ -42,7 +42,7 @@ class Create extends Component
         // $this->reset($this->form->all());
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.event.create');
     }

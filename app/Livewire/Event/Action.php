@@ -3,31 +3,21 @@
 namespace App\Livewire\Event;
 
 use App\Models\Attendee;
+use App\Models\Event;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class Action extends Component
 {
-    public $event;
-    public $isAttendee = false;
+    public Event $event;
+    public bool $isAttendee = false;
 
-    protected $listeners = [
-        'unAtendee' => '$refresh',
-        'attendee' => '$refresh',
-    ];
-
-    public function mount($event)
+    public function mount($event): void
     {
         $this->event = $event;
         $this->isAttendee = $this->userHasAttendee();
-    }
-
-    public function toggle()
-    {
-        if ($this->isAttendee) {
-            return $this->unAtendee();
-        }
-
-        return $this->attendee();
     }
 
     public function userHasAttendee(): bool
@@ -37,12 +27,33 @@ class Action extends Component
             ->exists();
     }
 
-    public function render()
+    public function toggle(): void
+    {
+        if ($this->isAttendee) {
+            $this->unAttendee();
+
+            return;
+        }
+
+        $this->attendee();
+    }
+
+    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         return view('livewire.event.action');
     }
 
-    private function attendee()
+    private function unAttendee(): void
+    {
+        $this->event
+            ->attendees()
+            ->where('user_id', auth()->id())
+            ->delete();
+
+        $this->dispatch('attendee');
+    }
+
+    private function attendee(): void
     {
         // check if user
         $this->authorize('create', Attendee::class);
@@ -52,16 +63,6 @@ class Action extends Component
             'event_id' => $this->event->id,
             'status' => 'going',
         ]);
-
-        $this->dispatch('attendee');
-    }
-
-    private function unAtendee()
-    {
-        $this->event
-            ->attendees()
-            ->where('user_id', auth()->id())
-            ->delete();
 
         $this->dispatch('attendee');
     }

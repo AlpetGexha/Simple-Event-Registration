@@ -1,4 +1,4 @@
-<form wire:submit.prevent="update">
+<form wire:submit.prevent="update" class="mb-5">
     <div class="mt-5">
         <x-input-label for="title" :value="__('Title')" />
         <x-text-input wire:model='form.title' class="block mt-1 w-full" type="text" required autofocus

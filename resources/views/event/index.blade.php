@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    {{-- @can('viewAny', \App\Models\Event::class) --}}
-    <livewire:event.carts :events="$events" />
-    {{-- @endcan --}}
+    {{--     @can('viewAny', $events)--}}
+    <livewire:event.carts :events="$events"/>
+    {{--     @endcan--}}
 
 </x-app-layout>

@@ -3,6 +3,12 @@
 use function Livewire\Volt\{state};
 
 state(['event']);
+
+$delete = function () {
+    $this->event->delete();
+
+    $this->dispatch('eventDeleted');
+};
 ?>
 
 {{-- @dd($event->getTagsValue()) --}}
@@ -42,6 +48,10 @@ state(['event']);
         @if ($event->user_id === auth()->id())
             <br><br><br>
             <a wire:navigate href="{{ route('event.update', ['event' => $event->id]) }}">Update</a>
+            <br>
+            <x-danger-button wire:click='delete'>
+                {{ __('Delete') }}
+            </x-danger-button>
         @endif
     </div>
 </div>

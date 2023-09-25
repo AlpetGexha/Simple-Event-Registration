@@ -91,4 +91,13 @@ class EventController extends Controller
 
         return view('event.goingto', compact('events'));
     }
+
+    public function myevents()
+    {
+        $events = Event::query()
+            ->where('user_id', auth()->id())
+            ->get();
+
+        return view('event.myevent', compact('events'));
+    }
 }

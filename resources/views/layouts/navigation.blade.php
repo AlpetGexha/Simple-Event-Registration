@@ -24,6 +24,10 @@
                         <x-nav-link :href="route('event.create')" :active="request()->routeIs('event.create')">
                             {{ __('Create Event') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('event.myevents')" :active="request()->routeIs('event.myevents')">
+                            {{ __('My Events') }}
+                        </x-nav-link>
                     @endauth
                 </div>
             </div>

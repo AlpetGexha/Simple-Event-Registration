@@ -12,7 +12,7 @@ class Update extends Component
 
     public EventForm $form;
 
-    public function mount($event): void
+    public function mount($event)
     {
         $this->form->setEvent($event);
     }
@@ -26,7 +26,7 @@ class Update extends Component
         return $this->redirect(route('event.single', $this->event->slug));
     }
 
-    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function render()
     {
         return view('livewire.event.update');
     }

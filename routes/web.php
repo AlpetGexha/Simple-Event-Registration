@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    // Auth::loginUsingId(601);
     return to_route('event.index');
 });
 

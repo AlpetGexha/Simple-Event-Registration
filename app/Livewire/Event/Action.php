@@ -14,7 +14,7 @@ class Action extends Component
     public Event $event;
     public bool $isAttendee = false;
 
-    public function mount($event): void
+    public function mount($event)
     {
         $this->event = $event;
         $this->isAttendee = $this->userHasAttendee();
@@ -38,7 +38,7 @@ class Action extends Component
         $this->attendee();
     }
 
-    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render()
     {
         return view('livewire.event.action');
     }

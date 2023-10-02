@@ -13,3 +13,10 @@ cp .env.example .env
 php artisan migrate --seed
 ```
 
+# Start
+```
+php artisan serve
+```
+```
+npm run dev
+```

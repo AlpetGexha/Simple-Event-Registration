@@ -1,7 +1,7 @@
 # Event Registraion 
 Simple Event Registraion Where User can create an event and attendee other events
 
-![Event_Registration_sc](https://github.com/AlpetGexha/Simple-Event-Registration/assets/50520333/7f677fbb-a3ec-4c23-a2ba-692d3ba7eed1)
+![Event_sc](https://github.com/AlpetGexha/Simple-Event-Registration/assets/50520333/bb147da9-3227-4b5f-942e-8c2cda56dddf)
 
 # Installation
 ```
